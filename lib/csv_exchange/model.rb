@@ -139,11 +139,7 @@ module CsvExchange
           self.class.csv_setup[:cells].each do |cell|
             case cell[:type]
             when :attribute
-              if cell[:opts][:identifier] and opts[:export_without_ids]
-                row << 'new'
-              else
-                row << send(cell[:name])
-              end
+              row << send(cell[:name])
             when :association
               records = [send(cell[:name])].flatten
               data = records.map{|rec| rec.send(cell[:opts][:map])}
